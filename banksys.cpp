@@ -26,27 +26,37 @@ Cliente::Cliente(const Cliente &a)
   this->fone = a.fone;
 }
 
-void Cliente::get()
+string Cliente::getnomeCliente ()const
 {
-string name, id, add, pho;
-
-cout<<endl<<"Digite o nome do cliente "<<endl;
-getline(cin,name);
-cout<<"Digite o cpf ou cnpj do cliente"<<endl;
-getline(cin,id);
-cout<<"Digite o endereço do cliente"<<endl;
-getline(cin,add);
-cout<<"Digite o telefone do cliente"<<endl;
-getline(cin,pho);
-
-this->set(name,id,add,pho);
+return nomeCliente;
+}
+string Cliente::getcpf_cnpj ()const
+{
+return cpf_cnpj;
+}
+string Cliente::getendereco ()const
+{
+return endereco;
+}
+string Cliente::getfone ()const
+{
+  return fone;
 }
 
-void Cliente::set(string name,string id,string add,string pho)
+void Cliente::setnomeCliente(string name)
 {
-  this->nomeCliente = name;
-  this->cpf_cnpj = id;
-  this->endereco = add;
+this->nomeCliente=name;
+}
+void Cliente::setcpf_cnpj(string id)
+{
+this->cpf_cnpj=id;
+}
+void Cliente::setendereco(string add)
+{
+this->endereco =add;
+}
+void Cliente::setfone(string pho)
+{
   this->fone = pho;
 }
 
