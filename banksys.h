@@ -23,10 +23,15 @@ public:
 //{
 
 //};
-//class Conta
-//{
-
-//};
+class Conta
+{
+private:
+int numConta;
+double saldo;
+Cliente cliente;
+std::vector <int> movimentacoes;
+static int proximoNumConta;
+};
 //class Banco
 //{
 
