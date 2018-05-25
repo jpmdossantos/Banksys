@@ -5,12 +5,20 @@ using namespace std;
 
 int main()
 {
-Cliente mateus;
-mateus.putdata();
-mateus.setnomeCliente("jorge");
-mateus.putdata();
-Cliente jaco("jaco", "08654","Rua da sacanagem","+5531065156321");
-jaco.setnomeCliente(mateus.getnomeCliente());
-jaco.putdata();
+  time_t now = time(NULL);
+  Data chorume(now);
+  Data lixo;
+
+
+  Cliente mateus;
+  mateus.putdata();
+  mateus.setnomeCliente("jorge");
+  mateus.putdata();
+  Cliente jaco("hatsune miko", "08654","Rua da sacanagem","+5531065156321");
+  //jaco.setnomeCliente(mateus.getnomeCliente());
+  jaco.putdata();
+
+  cout << endl << lixo.get_data() << endl;
+  cout << endl << chorume.get_data() << endl;
 
 }

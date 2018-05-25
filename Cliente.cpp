@@ -63,9 +63,9 @@ void Cliente::setfone(string pho)
 
 void Cliente::putdata()
 {
-  cout<<endl<<"Nome = "<<this->nomeCliente<<endl;
-  cout<<"CPF/CNPJ = "<<this->cpf_cnpj<<endl;
-  cout<<"Endereço = "<<this->endereco<<endl;
-  cout<<"Telefone = "<<this->fone<<endl;
+  cout<<endl<<"Nome: "<< this->nomeCliente <<endl;
+  cout<<"CPF/CNPJ: "<< this->cpf_cnpj <<endl;
+  cout<<"Endereço: "<< this->endereco <<endl;
+  cout<<"Telefone: "<< this->fone <<endl;
 
 }

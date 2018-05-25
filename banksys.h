@@ -1,5 +1,24 @@
 #ifndef BANKSYS_H
 #define BANKSYS_H
+
+#include <vector>
+
+
+
+class Data
+{
+private:
+  std::string dia_;
+  std::string mes_;
+  std::string ano_;
+
+public:
+  Data();
+  Data(time_t &data);
+  std::string get_data();
+};
+
+
 class Cliente
 {
 private:
@@ -19,19 +38,44 @@ public:
   void putdata();
 
 };
-//class Movimentacao
-//{
 
-//};
+
+class Movimentacao
+{
+private:
+  Data dataMov_;
+  std::string descricao_;
+  char debito_credito;
+  double valor;
+
+public:
+  Movimentacao();
+  Movimentacao(Data dataMov, std::string descricao, double valor);
+  Movimentacao(const Movimentacao &M);
+  Data get_data();
+  std::string get_descricao();
+  double get_valor();
+
+};
+
+
 class Conta
 {
 private:
-int numConta;
-double saldo;
-Cliente cliente;
-std::vector <int> movimentacoes;
-static int proximoNumConta;
+  int numConta_;
+  double saldo_;
+  Cliente cliente_;
+  std::vector <int> movimentacoes_;
+  static int proximoNumConta_;
+
+public:
+  Conta(const Cliente &cliente);
+  int get_num_conta();
+  double get_saldo();
+  Cliente get_cliente();
+
 };
+
 //class Banco
 //{
 
@@ -40,4 +84,8 @@ static int proximoNumConta;
 //{
 
 //};
+
+
+
+
 #endif
