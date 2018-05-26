@@ -7,14 +7,14 @@ using namespace std;
 Cliente::Cliente(string name, string id, string add, string pho)
 {
   this->nomeCliente = name;
-  this->cpf_cnpj = id;
+  this->cpf_cnpj_ = id;
   this->endereco = add;
   this->fone = pho;
 }
 Cliente::Cliente()
 {
   this->nomeCliente = "default";
-  this->cpf_cnpj = "default";
+  this->cpf_cnpj_ = "default";
   this->endereco = "default";
   this->fone = "default";
 }
@@ -22,7 +22,7 @@ Cliente::Cliente()
 Cliente::Cliente(const Cliente &a)
 {
   this->nomeCliente = a.nomeCliente;
-  this->cpf_cnpj = a.cpf_cnpj;
+  this->cpf_cnpj_ = a.cpf_cnpj_;
   this->endereco = a.endereco;
   this->fone = a.fone;
 }
@@ -33,7 +33,7 @@ return nomeCliente;
 }
 string Cliente::getcpf_cnpj ()const
 {
-return cpf_cnpj;
+return cpf_cnpj_;
 }
 string Cliente::getendereco ()const
 {
@@ -50,7 +50,7 @@ this->nomeCliente=name;
 }
 void Cliente::setcpf_cnpj(string id)
 {
-this->cpf_cnpj=id;
+this->cpf_cnpj_=id;
 }
 void Cliente::setendereco(string add)
 {
@@ -64,7 +64,7 @@ void Cliente::setfone(string pho)
 void Cliente::putdata()
 {
   cout<<endl<<"Nome: "<< this->nomeCliente <<endl;
-  cout<<"CPF/CNPJ: "<< this->cpf_cnpj <<endl;
+  cout<<"CPF/CNPJ: "<< this->cpf_cnpj_ <<endl;
   cout<<"Endereço: "<< this->endereco <<endl;
   cout<<"Telefone: "<< this->fone <<endl;
 

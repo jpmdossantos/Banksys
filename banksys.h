@@ -22,7 +22,7 @@ public:
 class Cliente
 {
 private:
-std::string nomeCliente, cpf_cnpj, endereco, fone;
+std::string nomeCliente, cpf_cnpj_, endereco, fone;
 public:
   Cliente(std::string name, std::string id, std::string add, std::string pho);
   Cliente(const Cliente &a);
@@ -69,6 +69,7 @@ private:
   static int proximoNumConta_;
 
 public:
+  Conta();
   Conta(const Cliente &cliente);
   int get_num_conta();
   double get_saldo();
@@ -76,10 +77,41 @@ public:
 
 };
 
-//class Banco
-//{
+class Banco
+{
+private:
+  std::string nomeBanco_;
+  std::vector <Cliente> clientes_;
+  std::vector <Conta> contas_;
 
-//};
+public:
+  Banco();
+  Banco(std::string nome);
+  void inserirCliente(Cliente C);
+  void criarConta(const Cliente &C);
+  void excluirCliente(std::string cpf_cnpj);
+  void excluirConta(int numConta);
+  void deposito(int numConta, double valor);
+  void saque(int numConta, double valor);
+  void transferencia(int numContaOrigem, int numContaDestino, double valor);
+  void cobrarTarifa();
+  void cobrarCPMF();
+  double obterSaldo(int numConta);
+  std::string obterExtrato(int numConta);
+  std::string obterExtrato(int numConta, Data dInicial);
+  std::string obterExtrato(int numConta, Data dInicial, Data dFinal);
+  std::vector<Cliente> obterListaClientes();
+  std::vector<Conta> obterListaContas();
+  void gravarDados();
+  void gravarDados(std::string path);
+  void lerDados();
+  void lerDados(std::string path);
+
+
+};
+
+
+
 //class Interface
 //{
 

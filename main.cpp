@@ -14,7 +14,7 @@ int main()
   mateus.putdata();
   mateus.setnomeCliente("jorge");
   mateus.putdata();
-  Cliente jaco("hatsune miko", "08654","Rua da sacanagem","+5531065156321");
+  Cliente jaco("hatsune miko", "08654","Rua do Flavio","+5531065156321");
   //jaco.setnomeCliente(mateus.getnomeCliente());
   jaco.putdata();
 
