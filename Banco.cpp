@@ -90,14 +90,12 @@ std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)
 
 std::vector<Cliente> Banco::obterListaClientes()
 {
-  std::vector<Cliente> v;
-  return v;
+  return clientes_;
 }
 
 std::vector<Conta> Banco::obterListaContas()
 {
-  std::vector<Conta> v;
-  return v;
+  return contas_;
 }
 
 void Banco::gravarDados()
