@@ -9,8 +9,10 @@ Banco::Banco()
   nomeBanco_ = "JP&MA Chase";
 }
 
-Banco::Banco(std::string nome)
+Banco::Banco(std::string nome, std::vector<Cliente> clientes, std::vector<Conta> contas )
 {
+  clientes_ = clientes;
+  contas_ = contas;
   nomeBanco_ = nome;
 }
 
