@@ -113,11 +113,11 @@ public:
 
 
 
-//class Interface :: public Banco
-//{
+class Interface :: public Banco
+{
+void Interface::novocliente()
 
-
-//};
+};
 
 
 

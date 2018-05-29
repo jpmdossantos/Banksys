@@ -31,14 +31,17 @@ string Cliente::getnomeCliente ()const
 {
 return nomeCliente;
 }
+
 string Cliente::getcpf_cnpj ()const
 {
 return cpf_cnpj_;
 }
+
 string Cliente::getendereco ()const
 {
 return endereco;
 }
+
 string Cliente::getfone ()const
 {
   return fone;
@@ -67,5 +70,4 @@ void Cliente::putdata()
   cout<<"CPF/CNPJ: "<< this->cpf_cnpj_ <<endl;
   cout<<"Endereço: "<< this->endereco <<endl;
   cout<<"Telefone: "<< this->fone <<endl;
-
 }
