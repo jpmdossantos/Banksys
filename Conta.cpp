@@ -16,7 +16,7 @@ Conta::Conta()
 } //apenas usado para incializar,
   //nao precisa de incrementar proximoNumConta_
  na real acho q nem precisa dessa merda aqui*/
-  
+
 Conta::Conta(const Cliente &cliente)
 {
   numConta_ = proximoNumConta_;
@@ -38,4 +38,24 @@ double Conta::get_saldo()
 Cliente Conta::get_cliente()
 {
   return cliente_;
+}
+
+void Conta::debitar(double valor, std::string descr)
+{
+  Data agora;
+  Movimentacao m(agora, descr, 'D', valor);
+
+  if (!(saldo_ - valor < 0))
+  {
+    saldo_ -= valor;
+  }
+  movimentacoes_.push_back(m);
+}
+
+void Conta::creditar(double valor, std::string descr)
+{
+  Data agora;
+  Movimentacao m(agora, descr, 'C', valor);
+  saldo_ += valor;
+  movimentacoes_.push_back(m);
 }

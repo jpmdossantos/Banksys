@@ -14,6 +14,7 @@ private:
 
 public:
   Data();
+  Data(Data &d);
   Data(time_t &data);
   std::string get_data();
 };
@@ -46,15 +47,15 @@ private:
   Data dataMov_;
   std::string descricao_;
   char debito_credito;
-  double valor;
+  double valor_;
 
 public:
-  Movimentacao();
-  Movimentacao(Data dataMov, std::string descricao, double valor);
+  Movimentacao(Data dataMov, std::string descr, char dc, double valor);
   Movimentacao(const Movimentacao &M);
-  Data get_data();
+  Data get_data_obj();
   std::string get_descricao();
-  double get_valor();
+  double get_valor_mov();
+  char get_dc();
 
 };
 
@@ -65,7 +66,7 @@ private:
   int numConta_;
   double saldo_;
   Cliente cliente_;
-  std::vector <int> movimentacoes_;
+  std::vector <Movimentacao> movimentacoes_;
   static int proximoNumConta_;
 
 public:
@@ -74,6 +75,8 @@ public:
   int get_num_conta();
   double get_saldo();
   Cliente get_cliente();
+  void debitar(double valor, std::string descr);
+  void creditar(double valor, std::string descr);
 
 };
 

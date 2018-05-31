@@ -11,6 +11,13 @@ Data::Data()
   ano_ = "1970";
 }
 
+Data::Data(Data &d)
+{
+  dia_ = d.dia_;
+  mes_ = d.mes_;
+  ano_ = d.ano_;
+}
+
 Data::Data(time_t &data)
 {
   dia_ = "";
