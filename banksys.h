@@ -116,10 +116,23 @@ public:
 
 
 
-class Interface :: public Banco
+class Interface : public Banco
 {
-void Interface::novocliente()
-
+public:
+void novocliente();
+void excluirclientei();
+void excluircontai();
+void depositoi();
+void saquei();
+void transferenciai();
+void cobrartarifai();
+void cobrarcpmfi();
+void saldoi();
+void extratoi();
+void listaclientes();
+void printacliente(Cliente clientet);
+void listacontas();
+void printaconta(Conta contat);
 };
 
 
