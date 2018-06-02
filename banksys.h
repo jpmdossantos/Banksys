@@ -8,15 +8,13 @@
 class Data
 {
 private:
-  std::string dia_;
-  std::string mes_;
-  std::string ano_;
+
+time_t agora_;
 
 public:
   Data();
-  Data(Data &d);
-  Data(time_t &data);
-  std::string get_data();
+  time_t get_data_unix();
+  std::string get_data_formatado();
 };
 
 

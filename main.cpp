@@ -5,9 +5,8 @@ using namespace std;
 
 int main()
 {
-  time_t now = time(NULL);
-  Data chorume(now);
   Data lixo;
+  Data chorume;
 
 
   Cliente mateus;
@@ -18,7 +17,10 @@ int main()
   //jaco.setnomeCliente(mateus.getnomeCliente());
   jaco.putdata();
 
-  cout << endl << lixo.get_data() << endl;
-  cout << endl << chorume.get_data() << endl;
+  cout << endl << lixo.get_data_unix() << endl;
+  cout << endl << chorume.get_data_unix() << endl;
+  cout << endl << lixo.get_data_formatado() << endl;
+  cout << endl << chorume.get_data_formatado() << endl;
+
 
 }

@@ -1,41 +1,41 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+
 #include "banksys.h"
-using namespace std;
+
 
 Data::Data()
 {
-  dia_ = "1";
-  mes_ = "Jan";
-  ano_ = "1970";
+  agora_ = time(NULL);
+
+  // objeto data carrega consigo o momento em que
+  // o construtor foi chamado
 }
 
-Data::Data(Data &d)
+time_t Data::get_data_unix()
 {
-  dia_ = d.dia_;
-  mes_ = d.mes_;
-  ano_ = d.ano_;
+  return agora_;
 }
 
-Data::Data(time_t &data)
+std::string Data::get_data_formatado()
 {
-  dia_ = "";
-  mes_ = "";
-  ano_ = "";
 
+  time_t unix_ = agora_;
+  //faco uma copia pq essas funcoes malucas
+  // de tempo alteram a variavel de entrada,
+  //repare que a entrada eh passada por referencia
 
-  //formato time_t para data em string:
+  //formato time_t para data em string C:
   // www mmm dd hh:mm:ss yyyy
-  std::string sd(ctime(&data));
+  std::string sd(ctime(&unix_));
+  //cout << sd;
+  std::string ret = "";
 
-  dia_ += sd[8]; dia_ += sd[9];
-  mes_ += sd[4]; mes_ += sd[5]; mes_ += sd[6];
-  ano_ += sd[20]; ano_ += sd[21]; ano_ += sd[22];
-  ano_ += sd[23];
-}
+  ret += sd[8]; ret += sd[9]; ret += " ";
+  ret += sd[4]; ret += sd[5]; ret += sd[6]; ret += " ";
+  ret += sd[20]; ret += sd[21]; ret += sd[22]; ret += sd[23];
 
-std::string Data::get_data()
-{
-  return dia_ + ' ' + mes_ + ' ' + ano_;
+  return ret;
+
 }
