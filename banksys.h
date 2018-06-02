@@ -134,6 +134,7 @@ public:
 class Interface : public Banco
 {
 public:
+int menu();
 void novocliente();
 void excluirclientei();
 void excluircontai();
@@ -148,6 +149,7 @@ void listaclientes();
 void printacliente(Cliente clientet);
 void listacontas();
 void printaconta(Conta contat);
+void main();
 };
 
 

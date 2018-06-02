@@ -4,9 +4,98 @@
 #include "banksys.h"
 using namespace std;
 
-//void interface::menu(){
-//
-//}
+int Interface::menu(){
+  int menu;
+
+	cout << endl << endl
+		 << "      {{{{{{{{{{}}}}}}}}}" << endl
+		 << "   {{{{{{{{   MENU   }}}}}}}" << endl
+		 << "      {{{{{{{{{{}}}}}}}}}" << endl;
+
+
+		cout << "1.)Novo cliente " << endl
+			 << " 2.)Excluir cliente " << endl
+       << " 3.)Excluir conta " << endl
+       << " 4.)Realizar deposito " << endl
+       << " 5.)Realizar saque " << endl
+       << " 6.)Realizar transferencia " << endl
+       << " 7.)Cobrar tarifa " << endl
+       << " 8.)Cobrar cpmf " << endl
+       << " 9.)Ver o saldo " << endl
+       << "10.)Ver o extrato " << endl
+       << "11.)Listar os clientes " << endl
+       << "12.)Listar as contas " << endl
+       << "0.)Sair " << endl;
+			cin >> menu;
+switch (menu)
+{
+case(1):
+cout<<endl<<"{{{{Novo cliente}}}}"<<endl;
+this->novocliente();
+break;
+
+case(2):
+cout<<endl<<"{{{{Excluir cliente}}}}"<<endl;
+this->excluirclientei();
+break;
+
+case(3):
+cout<<endl<<"{{{{Excluir conta}}}}"<<endl;
+this->excluircontai();
+break;
+
+case(4):
+cout<<endl<<"{{{{Realizar deposito}}}}"<<endl;
+this->depositoi();
+break;
+
+case(5):
+cout<<endl<<"{{{{Realizar saque}}}}"<<endl;
+this->saquei();
+break;
+
+case(6):
+cout<<endl<<"{{{{Realizar transferencia}}}}"<<endl;
+this->novocliente();
+break;
+
+case(7):
+cout<<endl<<"{{{{Cobrar tarifa}}}}"<<endl;
+this->cobrartarifai();
+break;
+
+case(8):
+cout<<endl<<"{{{{Cobrar CPMF}}}}"<<endl;
+this->cobrarcpmfi();
+break;
+
+case(9):
+cout<<endl<<"{{{{Ver o saldo}}}}"<<endl;
+this->saldoi();
+break;
+
+case(10):
+cout<<endl<<"{{{{Ver o extrato}}}}"<<endl;
+this->extratoi();
+break;
+
+case(11):
+cout<<endl<<"{{{{Listar clientes}}}}"<<endl;
+this->listaclientes();
+break;
+
+case(12):
+cout<<endl<<"{{{{Listar contas}}}}"<<endl;
+this->listacontas();
+break;
+case(0):
+cout<<endl<<"{{{{Adeus}}}}"<<endl;
+break;
+default:
+cout<<"Comando invalido"<<endl;
+}
+return menu;
+}
 void Interface::novocliente(){
 
   string name,id,add,pho;
@@ -103,15 +192,24 @@ cout<<"O saldo da conta e de: R$"<<valor<<",00"<<endl;
 void Interface::extratoi(){
   int numConta;
   string extrato;
-  time_t dinicial,dfinal;
+  int dinicial,minicial,ainicial,dfinal,mfinal,afinal;
 
 cout <<endl<< "Insira o numero da conta a se avaliar o saldo"<<endl;
 cin>>numConta;
-cout <<endl<< "Insira a data inicial da consulta"<<endl;
+cout << "Insira o dia inicial da consulta"<<endl;
 cin>>dinicial;
-Data dini(dinicial);
-cout <<endl<< "Insira a data final da consulta"<<endl;
-Data dfim(dfinal);
+cout << "Insira o mes inicial da consulta"<<endl;
+cin>>minicial;
+cout << "Insira o ano inicial da consulta"<<endl;
+cin>>ainicial;
+Data dini(dinicial,minicial,ainicial);
+cout <<endl<< "Insira o dia final da consulta"<<endl;
+cin>>dfinal;
+cout << "Insira o mes final da consulta"<<endl;
+cin>>mfinal;
+cout << "Insira o ano final da consulta"<<endl;
+cin>>afinal;
+Data dfim(dfinal,mfinal,afinal);
 
 extrato = this->obterExtrato(numConta,dini,dfim);
 cout<<extrato<<endl;
@@ -156,6 +254,12 @@ void Interface::printaconta(Conta contat){
 
 }
 
-// void Interface::main(){
+void Interface::main(){
+int menu=1;
 
-//}
+while (menu!=0)
+{
+menu = this->menu();
+}
+
+}
