@@ -22,6 +22,8 @@ vector<Conta> contas;
 Interface Itau("Itau",clientes,contas);
 Itau.main();
 
+return 0;
+
 
 
 }

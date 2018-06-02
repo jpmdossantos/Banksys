@@ -155,9 +155,9 @@ double Banco::obterSaldo(int numConta)
     {
       return contas_[i].get_saldo() ;
     }
-    return -1;
-    //indicador de que nao achou a conta
   }
+  return -1;
+  //indicador de que nao achou a conta
 }
 
 std::string Banco::obterExtrato(int numConta)
