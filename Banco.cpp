@@ -282,7 +282,6 @@ void Banco::lerDados()
       getline(slinha, numeroconta, '|');
       getline(slinha, saldo, '|');
       getline(slinha, cpf, '|');
-      getline(slinha, fone, '|');
       while(slinha)
       {
         getline(slinha, data, '|');
