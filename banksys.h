@@ -19,9 +19,9 @@ public:
   Data(int dia, int mes, int ano);
   Data(Data const &d);
   std::string get_data_formatada();
-  int get_dia();
-  int get_mes();
-  int get_ano();
+  int get_dia()const;
+  int get_mes()const;
+  int get_ano()const;
   bool operator==(Data d);
   bool operator<(Data d);
   bool operator>(Data d);
@@ -48,7 +48,7 @@ public:
   void setcpf_cnpj(std::string id);
   void setendereco(std::string add);
   void setfone(std::string pho);
-  void putdata();
+
 
 };
 
@@ -64,10 +64,10 @@ private:
 public:
   Movimentacao(Data dataMov, std::string descr, char dc, double valor);
   Movimentacao(const Movimentacao &M);
-  Data get_data_obj();
-  std::string get_descricao();
-  double get_valor_mov();
-  char get_dc();
+  Data get_data_obj()const;
+  std::string get_descricao()const;
+  double get_valor_mov()const;
+  char get_dc()const;
 
 };
 
@@ -84,22 +84,22 @@ private:
 public:
   Conta();
   Conta(const Cliente &cliente);
-  int get_num_conta();
-  double get_saldo();
-  Cliente get_cliente();
-  std::vector <Movimentacao> get_movimentacoes();
+  int get_num_conta()const;
+  double get_saldo()const;
+  Cliente get_cliente()const;
+  std::vector <Movimentacao> get_movimentacoes()const;
   void debitar(double valor, std::string descr);
   void creditar(double valor, std::string descr);
-  std::string get_extrato();
-  std::string get_extrato(Data data);
-  std::string get_extrato(Data datain, Data datasup);
-  std::string get_ficha_conta();
+  std::string get_extrato()const;
+  std::string get_extrato(Data data)const;
+  std::string get_extrato(Data datain, Data datasup)const;
+  std::string get_ficha_conta()const;
 
 };
 
 class Banco
 {
-protected:
+private:
   std::string nomeBanco_;
   std::vector <Cliente> clientes_;
   std::vector <Conta> contas_;
@@ -108,7 +108,7 @@ protected:
 public:
   Banco();
   Banco(std::string nome,std::vector<Cliente> clientes,std::vector<Conta> contas);
-  void inserirCliente(Cliente C);
+  void inserirCliente(const Cliente &C);
   void criarConta(const Cliente &C);
   void excluirCliente(std::string cpf_cnpj);
   void excluirConta(int numConta);
@@ -117,16 +117,16 @@ public:
   void transferencia(int numContaOrigem, int numContaDestino, double valor);
   void cobrarTarifa();
   void cobrarCPMF();
-  double obterSaldo(int numConta);
-  std::string obterExtrato(int numConta);
-  std::string obterExtrato(int numConta, Data dInicial);
-  std::string obterExtrato(int numConta, Data dInicial, Data dFinal);
-  std::vector<Cliente> obterListaClientes();
-  std::vector<Conta> obterListaContas();
+  double obterSaldo(int numConta)const;
+  std::string obterExtrato(int numConta)const;
+  std::string obterExtrato(int numConta, Data dInicial)const;
+  std::string obterExtrato(int numConta, Data dInicial, Data dFinal)const;
+  std::vector<Cliente> obterListaClientes()const;
+  std::vector<Conta> obterListaContas()const;
   void gravarDados();
   void lerDados();
   std::string get_dados_conta(int numConta);
-  std::string get_dados_cliente(std::string cpf_cnpj);
+  std::string get_dados_cliente(std::string cpf_cnpj)const;
 
 
 };
@@ -148,12 +148,12 @@ void saquei();
 void transferenciai();
 void cobrartarifai();
 void cobrarcpmfi();
-void saldoi();
+void saldoi()const;
 void extratoi();
-void listaclientes();
-void printacliente(Cliente clientet);
-void listacontas();
-void printaconta(Conta contat);
+void listaclientes()const;
+void printacliente(const Cliente &clientet)const;
+void listacontas()const;
+void printaconta(const Conta &contat)const;
 void principal();
 };
 
