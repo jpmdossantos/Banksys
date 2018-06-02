@@ -23,13 +23,36 @@ Banco::Banco(std::string nome, std::vector<Cliente> clientes, std::vector<Conta>
 
 void Banco::inserirCliente(const Cliente &C)
 {
-  clientes_.push_back(C);
+  bool jaTemCPF = false;
+  for(size_t i = 0; i < clientes_.size(); i++)
+  {
+    if (clientes_[i].getcpf_cnpj() == C.getcpf_cnpj())
+    {
+      jaTemCPF = true;
+    }
+  }
+  if(!jaTemCPF)
+  {
+    clientes_.push_back(C);
+  }
+
 }
 
 void Banco::criarConta( const Cliente &C)
 {
+  bool jaTemConta = false; //primeiro verifica se o cliente ja tem conta
+  for(size_t i = 0; i < clientes_.size(); i++)
+  {
+    if (contas_[i].get_cliente().getcpf_cnpj() == C.getcpf_cnpj())
+    {
+      jaTemConta = true;
+    }
+  }
+  if (!jaTemConta)
+  {
   Conta nova(C);
   contas_.push_back(nova);
+  }
 }
 
 void Banco::excluirCliente(std::string cpf_cnpj)
