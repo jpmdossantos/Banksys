@@ -298,8 +298,14 @@ void Banco::lerDados()
       {
         if (clientes_[i].getcpf_cnpj() == cpf)
         {
-          Conta contaCarregada(clientes_[i]);
-          contaCarregada.get_movimentacoes() = movs;
+          this->criarConta(clientes_[i]);
+          for(size_t j = 0; j < contas_.size(); j++)
+          {
+            if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
+            {
+              contas_[j].get_movimentacoes() = movs;
+            }
+          }
         }
       }
     }
