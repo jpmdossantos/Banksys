@@ -154,7 +154,7 @@ void listaclientes();
 void printacliente(Cliente clientet);
 void listacontas();
 void printaconta(Conta contat);
-void main();
+void principal();
 };
 
 

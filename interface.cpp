@@ -295,7 +295,7 @@ void Interface::printaconta(Conta contat){
   cout<<endl<<endl<<"Numero da conta: "<< contat.get_num_conta();
 }
 
-void Interface::main(){
+void Interface::principal(){
 int menu=1;
 
 while (menu!=0)
