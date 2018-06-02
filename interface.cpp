@@ -4,6 +4,13 @@
 #include "banksys.h"
 using namespace std;
 
+Interface::Interface(){
+}
+
+Interface::Interface(string nome,vector<Cliente> clientes,vector<Conta> contas):Banco(nome,clientes,contas){
+
+}
+
 int Interface::menu(){
   int menu;
 
@@ -27,6 +34,7 @@ int Interface::menu(){
        << "12.)Listar as contas " << endl
        << "0.)Sair " << endl;
 			cin >> menu;
+      cin.clear();
 switch (menu)
 {
 case(1):
@@ -99,8 +107,11 @@ return menu;
 void Interface::novocliente(){
 
   string name,id,add,pho;
+
   cout<<endl<<"Digite o nome do cliente "<<endl;
   getline(cin,name);
+  getline(cin,name);
+
   cout<<"Digite o cpf ou cnpj do cliente"<<endl;
   getline(cin,id);
   cout<<"Digite o endereço do cliente"<<endl;

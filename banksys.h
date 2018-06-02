@@ -97,7 +97,7 @@ public:
 
 class Banco
 {
-private:
+protected:
   std::string nomeBanco_;
   std::vector <Cliente> clientes_;
   std::vector <Conta> contas_;
@@ -134,6 +134,8 @@ public:
 class Interface : public Banco
 {
 public:
+Interface();
+Interface(std::string nome,std::vector<Cliente> clientes,std::vector<Conta> contas);
 int menu();
 void novocliente();
 void excluirclientei();

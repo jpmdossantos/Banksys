@@ -24,7 +24,7 @@ string IntToString(int n)
 
 
 int Conta::proximoNumConta_ = 0;
-/*
+
 Conta::Conta()
 {
   Cliente gen;
@@ -32,9 +32,7 @@ Conta::Conta()
   numConta_ = -1;
   cliente_ = gen;
   saldo_ = 0;
-} //apenas usado para incializar,
-  //nao precisa de incrementar proximoNumConta_
- na real acho q nem precisa dessa merda aqui*/
+} 
 
 Conta::Conta(const Cliente &cliente)
 {
