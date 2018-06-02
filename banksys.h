@@ -85,9 +85,10 @@ private:
   std::vector <Cliente> clientes_;
   std::vector <Conta> contas_;
 
+
 public:
   Banco();
-  Banco(std::string nome);
+  Banco(std::string nome,std::vector<Cliente> clientes,std::vector<Conta> contas);
   void inserirCliente(Cliente C);
   void criarConta(const Cliente &C);
   void excluirCliente(std::string cpf_cnpj);
@@ -113,10 +114,24 @@ public:
 
 
 
-//class Interface
-//{
-
-//};
+class Interface : public Banco
+{
+public:
+void novocliente();
+void excluirclientei();
+void excluircontai();
+void depositoi();
+void saquei();
+void transferenciai();
+void cobrartarifai();
+void cobrarcpmfi();
+void saldoi();
+void extratoi();
+void listaclientes();
+void printacliente(Cliente clientet);
+void listacontas();
+void printaconta(Conta contat);
+};
 
 
 
