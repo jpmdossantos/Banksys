@@ -41,7 +41,7 @@ void Banco::inserirCliente(const Cliente &C)
 void Banco::criarConta( const Cliente &C)
 {
   bool jaTemConta = false; //primeiro verifica se o cliente ja tem conta
-  for(size_t i = 0; i < clientes_.size(); i++)
+  for(size_t i = 0; i < contas_.size(); i++)
   {
     if (contas_[i].get_cliente().getcpf_cnpj() == C.getcpf_cnpj())
     {
