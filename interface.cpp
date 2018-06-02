@@ -237,7 +237,7 @@ void Interface::extratoi(){
   string extrato;
   int dinicial,minicial,ainicial,dfinal,mfinal,afinal;
 
-cout <<endl<< "Insira o numero da conta a se avaliar o saldo"<<endl;
+cout <<endl<< "Insira o numero da conta a se avaliar extrato"<<endl;
 cin>>numConta;
 cout << "Insira o dia inicial da consulta"<<endl;
 cin>>dinicial;
