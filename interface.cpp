@@ -131,17 +131,19 @@ void Interface::novocliente(){
 void Interface::novaconta(){
 
   string cpf_cnpj;
+  vector<Cliente> temp;
+  temp = this->obterListaClientes();
   bool existe = false;
   cout<<"Digite o cpf ou cnpj do cliente"<<endl;
   getline(cin,cpf_cnpj);
   getline(cin,cpf_cnpj);
-  for (size_t i = 0; i<clientes_.size(); i++)
+  for (size_t i = 0; i<temp.size(); i++)
   {
-    if (clientes_[i].getcpf_cnpj() == cpf_cnpj)
+    if (temp[i].getcpf_cnpj() == cpf_cnpj)
     {
       existe = true;
-      this->criarConta(clientes_[i]);
-      i=clientes_.size();
+      this->criarConta(temp[i]);
+      i=temp.size();
     }
   }
   cout<<"Conta criada"<<endl;
@@ -213,7 +215,7 @@ void Interface::cobrarcpmfi(){
 
 }
 
-void Interface::saldoi(){
+void Interface::saldoi()const{
 
   int numConta;
   double valor;
@@ -258,7 +260,7 @@ extrato = this->obterExtrato(numConta,dini,dfim);
 cout<<extrato<<endl;
 }
 
-void Interface::listaclientes(){
+void Interface::listaclientes()const{
 std::vector<Cliente> temp;
 Cliente clientetemp;
 temp = this->obterListaClientes();
@@ -269,7 +271,7 @@ this->printacliente(clientetemp);
 }
 }
 
-void Interface::listacontas(){
+void Interface::listacontas()const{
   std::vector<Conta> temp;
   Conta contatemp;
   Cliente clientetemp;
@@ -284,20 +286,21 @@ void Interface::listacontas(){
   }
 }
 
-void Interface::printacliente(Cliente clientet){
+void Interface::printacliente(const Cliente &clientet)const{
   cout<<endl<<endl<<"Nome: "<< clientet.getnomeCliente() <<endl;
   cout<<"CPF/CNPJ: "<< clientet.getcpf_cnpj() <<endl;
   cout<<"Endereço: "<< clientet.getendereco() <<endl;
   cout<<"Telefone: "<< clientet.getfone() <<endl;
 }
 
-void Interface::printaconta(Conta contat){
+void Interface::printaconta(const Conta &contat)const{
   cout<<endl<<endl<<"Numero da conta: "<< contat.get_num_conta();
 }
 
 void Interface::principal(){
-int menu=1;
+
 this->lerDados();
+int menu=1;
 while (menu!=0)
 {
 menu = this->menu();

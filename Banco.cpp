@@ -21,7 +21,7 @@ Banco::Banco(std::string nome, std::vector<Cliente> clientes, std::vector<Conta>
   nomeBanco_ = nome;
 }
 
-void Banco::inserirCliente(Cliente C)
+void Banco::inserirCliente(const Cliente &C)
 {
   clientes_.push_back(C);
 }
@@ -70,7 +70,7 @@ void Banco::excluirConta(int numConta)
   }
 }
 
-void Banco::deposito(int numConta, double valor)
+void Banco::deposito( int numConta,double valor)
 {
   for(size_t i = 0; i<contas_.size(); i++)
   {
@@ -149,7 +149,7 @@ void Banco::cobrarCPMF()
   }
 }
 
-double Banco::obterSaldo(int numConta)
+double Banco::obterSaldo(int numConta)const
 {
   for(size_t i = 0; i<contas_.size(); i++)
   {
@@ -162,7 +162,7 @@ double Banco::obterSaldo(int numConta)
   //indicador de que nao achou a conta
 }
 
-std::string Banco::obterExtrato(int numConta)
+std::string Banco::obterExtrato(int numConta)const
 {
   for (size_t i = 0; i < contas_.size(); i++)
   {
@@ -174,7 +174,7 @@ std::string Banco::obterExtrato(int numConta)
   return "Conta inexistente";
 }
 
-std::string Banco::obterExtrato(int numConta, Data dInicial)
+std::string Banco::obterExtrato(int numConta, Data dInicial)const
 {
   for (size_t i = 0; i < contas_.size(); i++)
   {
@@ -186,7 +186,7 @@ std::string Banco::obterExtrato(int numConta, Data dInicial)
   return "Conta inexistente";
 }
 
-std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)
+std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)const
 {
   for (size_t i = 0; i < contas_.size(); i++)
   {
@@ -198,12 +198,12 @@ std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)
   return "Conta inexistente";
 }
 
-std::vector<Cliente> Banco::obterListaClientes()
+std::vector<Cliente> Banco::obterListaClientes()const
 {
   return clientes_;
 }
 
-std::vector<Conta> Banco::obterListaContas()
+std::vector<Conta> Banco::obterListaContas()const
 {
   return contas_;
 }
@@ -255,8 +255,8 @@ void Banco::lerDados()
   std::vector<Movimentacao> movs;
 
   std::string linha;
-  std::ifstream clientes("clientes.txt");
 
+  std::ifstream clientes("clientes.txt");
   if(clientes.is_open())
   {
     while(getline(clientes,linha))
@@ -271,7 +271,6 @@ void Banco::lerDados()
     }
   }
   clientes.close();
-
   std::ifstream contas("contas.txt");
 
   if (contas.is_open())
@@ -323,7 +322,7 @@ std::string Banco::get_dados_conta(int numConta)
   return "conta nao existe";
 }
 
-std::string Banco::get_dados_cliente(std::string cpf_cnpj)
+std::string Banco::get_dados_cliente(std::string cpf_cnpj)const
 {
   for (size_t i = 0; i < clientes_.size(); i++)
   {
