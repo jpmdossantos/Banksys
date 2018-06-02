@@ -237,8 +237,73 @@ void Banco::gravarDados()
 
 void Banco::lerDados()
 {
-  //essa aqui vai ser pica de fazer
+  std::string nome;
+  std::string cpf;
+  std::string endereco;
+  std::string fone;
+
+  std::string numeroconta;
+  std::string saldo;
+
+
+  std::string data;
+  std::string descricao;
+  std::string valor;
+  std::string dc;
+  std::vector<Movimentacao> movs;
+
+  std::string linha;
+  std::ifstream clientes("clientes.txt");
+  std::ifstream contas("contas.txt");
+
+  if(clientes.is_open())
+  {
+    while(getline(clientes,linha))
+    {
+      std::istringstream slinha(linha);
+      getline(slinha, nome, '|');
+      getline(slinha, cpf, '|');
+      getline(slinha, endereco, '|');
+      getline(slinha, fone, '|');
+      Cliente clienteCarregado(nome, cpf, endereco, fone);
+      this->inserirCliente(clienteCarregado);
+    }
+  }
+
+  if (contas.is_open())
+  {
+    while(getline(contas,linha))
+    {
+      std::istringstream slinha(linha);
+      getline(slinha, numeroconta, '|');
+      getline(slinha, saldo, '|');
+      getline(slinha, cpf, '|');
+      getline(slinha, fone, '|');
+      while(slinha)
+      {
+        getline(slinha, data, '|');
+        Data d(data);
+        getline(slinha, descricao, '|');
+        getline(slinha, valor, '|');
+        double dvalor = stod(valor);
+        getline(slinha, dc, '|');
+
+        Movimentacao movCarregada(d,descricao,dc[0],dvalor);
+        movs.push_back(movCarregada);
+      }
+      for (size_t i = 0; i < clientes_.size(); i++)
+      {
+        if (clientes_[i].getcpf_cnpj() == cpf)
+        {
+          Conta contaCarregada(clientes_[i]);
+          contaCarregada.get_movimentacoes() = movs;
+        }
+      }
+    }
+  }
 }
+
+
 
 
 

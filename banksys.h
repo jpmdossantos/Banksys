@@ -14,6 +14,7 @@ int mes_;
 int ano_;
 
 public:
+  Data(std::string dataformatada);
   Data();
   Data(int dia, int mes, int ano);
   Data(Data const &d);
@@ -86,6 +87,7 @@ public:
   int get_num_conta();
   double get_saldo();
   Cliente get_cliente();
+  std::vector <Movimentacao> get_movimentacoes();
   void debitar(double valor, std::string descr);
   void creditar(double valor, std::string descr);
   std::string get_extrato();

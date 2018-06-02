@@ -1,11 +1,28 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <sstream>
 
 #include "banksys.h"
 
+// dd/mm/aaaa
+Data::Data(std::string dataformatada)
+{
+  std::string dform = dataformatada;
+  std::istringstream sdata(dform);
 
+  std::string dia;
+  std::string mes;
+  std::string ano;
 
+  getline(sdata, dia, '/');
+  getline(sdata, mes, '/');
+  getline(sdata, ano, '/');
+
+  dia_ = stoi(dia);
+  mes_ = stoi(mes);
+  ano_ = stoi(ano);
+}
 
 Data::Data()
 {
@@ -106,6 +123,7 @@ std::string Data::get_data_formatada()
   return ret;
 
 }
+
 
 
 
