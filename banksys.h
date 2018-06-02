@@ -3,7 +3,7 @@
 
 #include <vector>
 
-
+std::string IntToString(int n);
 
 class Data
 {
