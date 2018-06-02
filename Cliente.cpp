@@ -47,6 +47,12 @@ string Cliente::getfone ()const
   return fone;
 }
 
+string Cliente::get_ficha()const
+{
+  return (this->getnomeCliente() + ", " + this->getcpf_cnpj()
+  + ", " + this->getendereco() + ", " + this->getfone());
+}
+
 void Cliente::setnomeCliente(string name)
 {
 this->nomeCliente=name;

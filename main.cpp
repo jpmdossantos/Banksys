@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "banksys.h"
 using namespace std;
+
 
 int main()
 {
@@ -10,6 +12,7 @@ int main()
 
 
   Cliente mateus;
+  Conta x(mateus);
   mateus.putdata();
   mateus.setnomeCliente("jorge");
   mateus.putdata();
@@ -17,10 +20,6 @@ int main()
   //jaco.setnomeCliente(mateus.getnomeCliente());
   jaco.putdata();
 
-  cout << endl << lixo.get_data_unix() << endl;
-  cout << endl << chorume.get_data_unix() << endl;
-  cout << endl << lixo.get_data_formatado() << endl;
-  cout << endl << chorume.get_data_formatado() << endl;
 
 
 }

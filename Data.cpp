@@ -5,23 +5,90 @@
 #include "banksys.h"
 
 
+
+
 Data::Data()
 {
-  agora_ = time(NULL);
+  time_t agora = time(NULL);
+  //formato time_t para data em string C:
+  // www mmm dd hh:mm:ss yyyy
+  std::string sd(ctime(&agora));
+  //cout << sd;
+  std::string sdia = "";
+  std::string smes = "";
+  std::string sano = "";
+
+  sdia += sd[8]; sdia += sd[9];
+  smes += sd[4]; smes += sd[5]; smes += sd[6];
+  sano += sd[20]; sano += sd[21]; sano += sd[22]; sano += sd[23];
+
+  dia_ = std::stoi(sdia);
+
+  if (smes == "Jan") mes_ = 1;
+  if (smes == "Feb") mes_ = 2;
+  if (smes == "Mar") mes_ = 3;
+  if (smes == "Apr") mes_ = 4;
+  if (smes == "May") mes_ = 5;
+  if (smes == "Jun") mes_ = 6;
+  if (smes == "Jul") mes_ = 7;
+  if (smes == "Aug") mes_ = 8;
+  if (smes == "Sep") mes_ = 9;
+  if (smes == "Oct") mes_ = 10;
+  if (smes == "Nov") mes_ = 11;
+  if (smes == "Dec") mes_ = 12;
+
+
+  ano_ = std::stoi(sano);
 
   // objeto data carrega consigo o momento em que
   // o construtor foi chamado
 }
 
+Data::Data(int dia, int mes, int ano)
+{
+  dia_ = dia;
+  mes_ = mes;
+  ano_ = ano;
+}
+
+Data::Data(Data const &d)
+{
+  dia_ = d.dia_;
+  mes_ = d.mes_;
+  ano_ = d.ano_;
+}
+
+
+
+/*
 time_t Data::get_data_unix()
 {
   return agora_;
 }
+*/
 
-std::string Data::get_data_formatado()
+
+int Data::get_dia()
+{
+  return dia_;
+}
+
+
+
+int Data::get_mes()
+{
+  return mes_;
+}
+
+int Data::get_ano()
+{
+  return ano_;
+}
+
+std::string Data::get_data_formatada()
 {
 
-  time_t unix_ = agora_;
+  time_t unix_;
   //faco uma copia pq essas funcoes malucas
   // de tempo alteram a variavel de entrada,
   //repare que a entrada eh passada por referencia
@@ -38,4 +105,57 @@ std::string Data::get_data_formatado()
 
   return ret;
 
+}
+
+
+
+bool Data::operator>(Data d)
+{
+  if (ano_ > d.ano_) return true;
+  if (ano_ < d.ano_) return false;
+
+  if (mes_ > d.mes_) return true;
+  if (mes_ < d.mes_) return false;
+
+  if (dia_ > d.dia_) return true;
+  return false;
+}
+
+bool Data::operator<(Data d)
+{
+  if (ano_ < d.ano_) return true;
+  if (ano_ > d.ano_) return false;
+
+  if (mes_ < d.mes_) return true;
+  if (mes_ > d.mes_) return false;
+
+  if (dia_ < d.dia_) return true;
+  return false;
+}
+
+bool Data::operator==(Data d)
+{
+  if (ano_ == d.ano_)
+  {
+    if (mes_ == d.mes_)
+    {
+      if (dia_ == d.dia_)
+      {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+bool Data::operator>=(Data d)
+{
+  if ((*this) > d || (*this) == d) return true;
+  else return false;
+}
+
+bool Data::operator<=(Data d)
+{
+  if ((*this) < d || (*this) == d) return true;
+  else return false;
 }

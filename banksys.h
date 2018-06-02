@@ -9,12 +9,24 @@ class Data
 {
 private:
 
-time_t agora_;
+int dia_;
+int mes_;
+int ano_;
 
 public:
   Data();
-  time_t get_data_unix();
-  std::string get_data_formatado();
+  Data(int dia, int mes, int ano);
+  Data(Data const &d);
+  std::string get_data_formatada();
+  int get_dia();
+  int get_mes();
+  int get_ano();
+  bool operator==(Data d);
+  bool operator<(Data d);
+  bool operator>(Data d);
+  bool operator>=(Data d);
+  bool operator<=(Data d);
+
 };
 
 
@@ -30,6 +42,7 @@ public:
   std::string getcpf_cnpj()const;
   std::string getendereco()const;
   std::string getfone()const;
+  std::string get_ficha()const;
   void setnomeCliente(std::string name);
   void setcpf_cnpj(std::string id);
   void setendereco(std::string add);
@@ -75,6 +88,10 @@ public:
   Cliente get_cliente();
   void debitar(double valor, std::string descr);
   void creditar(double valor, std::string descr);
+  std::string get_extrato();
+  std::string get_extrato(Data data);
+  std::string get_extrato(Data datain, Data datasup);
+  std::string get_ficha_conta();
 
 };
 
@@ -105,9 +122,9 @@ public:
   std::vector<Cliente> obterListaClientes();
   std::vector<Conta> obterListaContas();
   void gravarDados();
-  void gravarDados(std::string path);
   void lerDados();
-  void lerDados(std::string path);
+  std::string get_dados_conta(int numConta);
+  std::string get_dados_cliente(std::string cpf_cnpj);
 
 
 };

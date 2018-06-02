@@ -1,8 +1,27 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <vector>
+#include <sstream>
 #include "banksys.h"
 using namespace std;
+
+
+string DoubleToString(double d)
+{
+  std::ostringstream ss;
+  ss << d;
+  return ss.str();
+}
+
+string IntToString(int n)
+{
+  std::ostringstream ss;
+  ss << n;
+  return ss.str();
+}
+
+
 
 int Conta::proximoNumConta_ = 0;
 /*
@@ -58,4 +77,80 @@ void Conta::creditar(double valor, std::string descr)
   Movimentacao m(agora, descr, 'C', valor);
   saldo_ += valor;
   movimentacoes_.push_back(m);
+}
+
+std::string Conta::get_extrato()
+{
+  Data agora;
+  std::string ret = "";
+  for (size_t i = 0; i < movimentacoes_.size(); i++)
+  {
+    if (movimentacoes_[i].get_data_obj().get_ano() == agora.get_ano())
+    {
+      if (movimentacoes_[i].get_data_obj().get_mes() == agora.get_mes())
+      {
+        ret += movimentacoes_[i].get_data_obj().get_data_formatada(); ret += " ";
+        ret += movimentacoes_[i].get_descricao(); ret += " ";
+        ret += movimentacoes_[i].get_dc(); ret += " ";
+        ret += movimentacoes_[i].get_valor_mov(); ret += "\n";
+      }
+    }
+  }
+  return ret;
+
+}
+
+//temq ser na forma certinha 'd/m/a' senao da ruim
+std::string Conta::get_extrato(Data data)
+{
+  std::string ret = "";
+  for (size_t i = 0; i < movimentacoes_.size(); i++)
+  {
+    if (movimentacoes_[i].get_data_obj() >= data)
+    {
+      ret += movimentacoes_[i].get_data_obj().get_data_formatada(); ret += " ";
+      ret += movimentacoes_[i].get_descricao(); ret += " ";
+      ret += movimentacoes_[i].get_dc(); ret += " ";
+      ret += movimentacoes_[i].get_valor_mov(); ret += "\n";
+    }
+  }
+  return ret;
+}
+
+
+std::string Conta::get_extrato(Data datain, Data datasup)
+{
+  std::string ret = "";
+  for (size_t i = 0; i < movimentacoes_.size(); i++)
+  {
+    if (movimentacoes_[i].get_data_obj() >= datain)
+    {
+      if(movimentacoes_[i].get_data_obj() <= datasup)
+      {
+        ret += movimentacoes_[i].get_data_obj().get_data_formatada(); ret += " ";
+        ret += movimentacoes_[i].get_descricao(); ret += " ";
+        ret += movimentacoes_[i].get_dc(); ret += " ";
+        ret += DoubleToString(movimentacoes_[i].get_valor_mov()); ret += "\n";
+      }
+    }
+  }
+  return ret;
+
+}
+
+std::string Conta::get_ficha_conta()
+{
+  std::string ret = "";
+  ret += this->get_num_conta() + ", ";
+  ret += DoubleToString(this->get_saldo()) + ", ";
+  ret += this->get_cliente().getcpf_cnpj();
+  for (size_t i = 0; i < movimentacoes_.size(); i++)
+  {
+    ret += ", ";
+    ret += movimentacoes_[i].get_data_obj().get_data_formatada() + ", ";
+    ret += movimentacoes_[i].get_descricao() + ", ";
+    ret += DoubleToString(movimentacoes_[i].get_valor_mov()); ret += ", ";
+    ret += movimentacoes_[i].get_dc();
+  }
+  ret += "\n";
 }

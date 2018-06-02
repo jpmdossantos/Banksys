@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -161,17 +162,38 @@ double Banco::obterSaldo(int numConta)
 
 std::string Banco::obterExtrato(int numConta)
 {
-  return "";
+  for (size_t i = 0; i < contas_.size(); i++)
+  {
+    if (contas_[i].get_num_conta() == numConta)
+    {
+      return contas_[i].get_extrato();
+    }
+  }
+  return "Conta inexistente";
 }
 
 std::string Banco::obterExtrato(int numConta, Data dInicial)
 {
-  return "";
+  for (size_t i = 0; i < contas_.size(); i++)
+  {
+    if (contas_[i].get_num_conta() == numConta)
+    {
+      return contas_[i].get_extrato(dInicial);
+    }
+  }
+  return "Conta inexistente";
 }
 
 std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)
 {
-  return "";
+  for (size_t i = 0; i < contas_.size(); i++)
+  {
+    if (contas_[i].get_num_conta() == numConta)
+    {
+      return contas_[i].get_extrato(dInicial, dFinal);
+    }
+  }
+  return "Conta inexistente";
 }
 
 std::vector<Cliente> Banco::obterListaClientes()
@@ -184,22 +206,62 @@ std::vector<Conta> Banco::obterListaContas()
   return contas_;
 }
 
+
+
 void Banco::gravarDados()
 {
+  std::ofstream clientes("clientes.txt");
+  std::ofstream contas("contas.txt");
 
-}
+  if(clientes.is_open())
+  {
+    for(size_t i = 0; i < clientes_.size(); i++)
+    {
+      clientes << clientes_[i].get_ficha() + "\n";
+    }
+  }
 
-void Banco::gravarDados(std::string path)
-{
+  clientes.close();
+
+  if (contas.is_open())
+  {
+    for(size_t i = 0; i < contas_.size(); i++)
+    {
+      contas << contas_[i].get_ficha_conta() + "\n";
+    }
+  }
+  contas.close();
+
 
 }
 
 void Banco::lerDados()
 {
-
+  //essa aqui vai ser pica de fazer
 }
 
-void Banco::lerDados(std::string path)
-{
 
+
+std::string Banco::get_dados_conta(int numConta)
+{
+  for (size_t i = 0; i < contas_.size(); i++)
+  {
+    if (contas_[i].get_num_conta() == numConta)
+    {
+      return contas_[i].get_ficha_conta();
+    }
+  }
+  return "conta nao existe";
+}
+
+std::string Banco::get_dados_cliente(std::string cpf_cnpj)
+{
+  for (size_t i = 0; i < clientes_.size(); i++)
+  {
+    if (clientes_[i].getcpf_cnpj() == cpf_cnpj)
+    {
+      return clientes_[i].get_ficha();
+    }
+  }
+  return "cliente nao existe";
 }
