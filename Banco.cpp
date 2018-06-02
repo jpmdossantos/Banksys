@@ -254,7 +254,6 @@ void Banco::lerDados()
 
   std::string linha;
   std::ifstream clientes("clientes.txt");
-  std::ifstream contas("contas.txt");
 
   if(clientes.is_open())
   {
@@ -269,6 +268,9 @@ void Banco::lerDados()
       this->inserirCliente(clienteCarregado);
     }
   }
+  clientes.close();
+
+  std::ifstream contas("contas.txt");
 
   if (contas.is_open())
   {
@@ -301,6 +303,7 @@ void Banco::lerDados()
       }
     }
   }
+  contas.close();
 }
 
 
