@@ -222,7 +222,7 @@ cout <<endl<< "Insira o numero da conta a se avaliar o saldo"<<endl;
 cin>>numConta;
 valor = this->obterSaldo(numConta);
 
-if(valor = -1){
+if(valor == -1){
 cout<< "O numero de conta inserido nao foi encontrado";
 }
 else{
