@@ -212,8 +212,10 @@ std::vector<Conta> Banco::obterListaContas()const
 
 void Banco::gravarDados()
 {
-  std::ofstream clientes("clientes.txt");
-  std::ofstream contas("contas.txt");
+  std::ofstream clientes;
+  clientes.open("clientes.txt", std::ofstream::out | std::ofstream::trunc);
+  std::ofstream contas;
+  contas.open("contas.txt", std::ofstream::out | std::ofstream::trunc);
 
   if(clientes.is_open())
   {
