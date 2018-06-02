@@ -20,21 +20,21 @@ int Interface::menu(){
 		 << "      {{{{{{{{{{}}}}}}}}}" << endl;
 
 
-		cout << "1.)Novo cliente " << endl
+		cout <<"1.)Novo cliente " << endl
 			 << " 2.)Excluir cliente " << endl
-       << " 3.)Excluir conta " << endl
-       << " 4.)Realizar deposito " << endl
-       << " 5.)Realizar saque " << endl
-       << " 6.)Realizar transferencia " << endl
-       << " 7.)Cobrar tarifa " << endl
-       << " 8.)Cobrar cpmf " << endl
-       << " 9.)Ver o saldo " << endl
-       << "10.)Ver o extrato " << endl
-       << "11.)Listar os clientes " << endl
-       << "12.)Listar as contas " << endl
+       << " 3.)Nova conta"<<endl
+       << " 4.)Excluir conta " << endl
+       << " 5.)Realizar deposito " << endl
+       << " 6.)Realizar saque " << endl
+       << " 7.)Realizar transferencia " << endl
+       << " 8.)Cobrar tarifa " << endl
+       << " 9.)Cobrar cpmf " << endl
+       << "10.)Ver o saldo " << endl
+       << "11.)Ver o extrato " << endl
+       << "12.)Listar os clientes " << endl
+       << "13.)Listar as contas " << endl
        << "0.)Sair " << endl;
 			cin >> menu;
-      cin.clear();
 switch (menu)
 {
 case(1):
@@ -48,51 +48,56 @@ this->excluirclientei();
 break;
 
 case(3):
+cout<<endl<<"{{{{Nova conta}}}}"<<endl;
+this->novaconta();
+break;
+
+case(4):
 cout<<endl<<"{{{{Excluir conta}}}}"<<endl;
 this->excluircontai();
 break;
 
-case(4):
+case(5):
 cout<<endl<<"{{{{Realizar deposito}}}}"<<endl;
 this->depositoi();
 break;
 
-case(5):
+case(6):
 cout<<endl<<"{{{{Realizar saque}}}}"<<endl;
 this->saquei();
 break;
 
-case(6):
+case(7):
 cout<<endl<<"{{{{Realizar transferencia}}}}"<<endl;
-this->novocliente();
+this->transferenciai();
 break;
 
-case(7):
+case(8):
 cout<<endl<<"{{{{Cobrar tarifa}}}}"<<endl;
 this->cobrartarifai();
 break;
 
-case(8):
+case(9):
 cout<<endl<<"{{{{Cobrar CPMF}}}}"<<endl;
 this->cobrarcpmfi();
 break;
 
-case(9):
+case(10):
 cout<<endl<<"{{{{Ver o saldo}}}}"<<endl;
 this->saldoi();
 break;
 
-case(10):
+case(11):
 cout<<endl<<"{{{{Ver o extrato}}}}"<<endl;
 this->extratoi();
 break;
 
-case(11):
+case(12):
 cout<<endl<<"{{{{Listar clientes}}}}"<<endl;
 this->listaclientes();
 break;
 
-case(12):
+case(13):
 cout<<endl<<"{{{{Listar contas}}}}"<<endl;
 this->listacontas();
 break;
@@ -120,14 +125,33 @@ void Interface::novocliente(){
   getline(cin,pho);
   Cliente novo(name,id,add,pho);
   this->inserirCliente (novo);
-  this->criarConta (novo);
+  cout<<"Cliente criado"<<endl;
 }
 
+void Interface::novaconta(){
+
+  string cpf_cnpj;
+  bool existe = false;
+  cout<<"Digite o cpf ou cnpj do cliente"<<endl;
+  getline(cin,cpf_cnpj);
+  getline(cin,cpf_cnpj);
+  for (size_t i = 0; i<clientes_.size(); i++)
+  {
+    if (clientes_[i].getcpf_cnpj() == cpf_cnpj)
+    {
+      existe = true;
+      this->criarConta(clientes_[i]);
+      i=clientes_.size();
+    }
+  }
+  cout<<"Conta criada"<<endl;
+  }
 void Interface::excluirclientei(){
   string cpf_cnpj;
 cout <<endl<< "Insira o CPF ou o CNPJ do cliente a ser excluido"<<endl;
 getline(cin,cpf_cnpj);
 this->excluirCliente(cpf_cnpj);
+
 }
 
 void Interface::excluircontai(){
@@ -135,6 +159,7 @@ void Interface::excluircontai(){
 cout <<endl<< "Insira o numero da conta a ser excluida"<<endl;
 cin>>numConta;
 this->excluirConta(numConta);
+
 }
 
 void Interface::depositoi(){
@@ -145,6 +170,7 @@ cin>>numConta;
 cout << "Insira o valor a ser depositado"<<endl;
 cin>>valor;
 this->deposito(numConta, valor);
+
 }
 
 void Interface::saquei(){
@@ -155,6 +181,7 @@ cin>>numConta;
 cout << "Insira o valor a ser sacado"<<endl;
 cin>>valor;
 this->saque(numConta, valor);
+
 }
 
 void Interface::transferenciai(){
@@ -169,19 +196,20 @@ cin>>valor;
 
 this->transferencia(oriconta,destconta, valor);
 
+
 }
 
 void Interface::cobrartarifai(){
 
 this->cobrarTarifa();
-cout<<endl<<"Tarifa Cobrada"<<endl;
+
 
 
 }
 void Interface::cobrarcpmfi(){
 
   this->cobrarCPMF();
-  cout<<endl<<"CPMF Cobrada"<<endl;
+
 
 }
 
@@ -194,11 +222,15 @@ cout <<endl<< "Insira o numero da conta a se avaliar o saldo"<<endl;
 cin>>numConta;
 valor = this->obterSaldo(numConta);
 
-if(valor = -1)
+if(valor = -1){
 cout<< "O numero de conta inserido nao foi encontrado";
-else
+}
+else{
 cout<<"O saldo da conta e de: R$"<<valor<<",00"<<endl;
 }
+}
+
+
 
 void Interface::extratoi(){
   int numConta;
@@ -260,9 +292,7 @@ void Interface::printacliente(Cliente clientet){
 }
 
 void Interface::printaconta(Conta contat){
-  cout<<endl<<endl<<"Nome: "<< contat.get_num_conta() <<endl;
-  cout<<"CPF/CNPJ: "<< contat.get_saldo() <<endl;
-
+  cout<<endl<<endl<<"Numero da conta: "<< contat.get_num_conta();
 }
 
 void Interface::main(){

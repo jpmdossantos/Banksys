@@ -139,6 +139,7 @@ Interface(std::string nome,std::vector<Cliente> clientes,std::vector<Conta> cont
 int menu();
 void novocliente();
 void excluirclientei();
+void novaconta();
 void excluircontai();
 void depositoi();
 void saquei();
