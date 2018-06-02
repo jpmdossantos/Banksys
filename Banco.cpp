@@ -5,7 +5,7 @@
 #include <vector>
 #include <cstdio>
 #include "banksys.h"
-
+using namespace std;
 
 Banco::Banco()
 {
@@ -74,7 +74,7 @@ void Banco::deposito(int numConta, double valor)
   {
     if (contas_[i].get_num_conta() == numConta)
     {
-      contas_[i].debitar(valor, "Deposito");
+      contas_[i].creditar(valor, "Deposito");
       break;
     }
   }
@@ -153,7 +153,7 @@ double Banco::obterSaldo(int numConta)
   {
     if (contas_[i].get_num_conta() == numConta)
     {
-      return contas_[i].get_saldo() ;
+      return    contas_[i].get_saldo() ;
     }
   }
   return -1;

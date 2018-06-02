@@ -297,10 +297,10 @@ void Interface::printaconta(Conta contat){
 
 void Interface::principal(){
 int menu=1;
-
+this->lerDados();
 while (menu!=0)
 {
 menu = this->menu();
 }
-
+this->gravarDados();
 }
