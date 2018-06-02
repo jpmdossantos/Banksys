@@ -152,6 +152,7 @@ void Interface::excluirclientei(){
   string cpf_cnpj;
 cout <<endl<< "Insira o CPF ou o CNPJ do cliente a ser excluido"<<endl;
 getline(cin,cpf_cnpj);
+getline(cin,cpf_cnpj);
 this->excluirCliente(cpf_cnpj);
 
 }
