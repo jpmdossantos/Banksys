@@ -101,7 +101,7 @@ void Banco::transferencia(int numContaOrigem, int numContaDestino, double valor)
   {
     if (contas_[i].get_num_conta() == numContaOrigem)
     {
-      numeroStr << numContaDestino;
+      numeroStr << IntToString(numContaDestino);
       std::string texto = "Transferencia para a conta "
       + numeroStr.str();
 
@@ -118,10 +118,10 @@ void Banco::transferencia(int numContaOrigem, int numContaDestino, double valor)
   {
     if (contas_[i].get_num_conta() == numContaDestino)
     {
-      numeroStr << numContaOrigem;
+      numeroStr << IntToString(numContaOrigem);
       std::string texto = "Transferencia da conta "
       + numeroStr.str();
-      contas_[i].debitar(valor, texto);
+      contas_[i].creditar(valor, texto);
       break;
     }
   }
