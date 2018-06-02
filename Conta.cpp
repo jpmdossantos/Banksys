@@ -126,8 +126,8 @@ std::string Conta::get_extrato(Data datain, Data datasup)const
       if(movimentacoes_[i].get_data_obj() <= datasup)
       {
         ret += movimentacoes_[i].get_data_obj().get_data_formatada(); ret += " ";
-        ret += movimentacoes_[i].get_descricao(); ret += " ";
-        ret += movimentacoes_[i].get_dc(); ret += " ";
+        ret += movimentacoes_[i].get_descricao(); ret += "|";
+        ret += movimentacoes_[i].get_dc(); ret += "|";
         ret += DoubleToString(movimentacoes_[i].get_valor_mov()); ret += "\n";
       }
     }

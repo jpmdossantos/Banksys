@@ -284,6 +284,7 @@ void Banco::lerDados()
       while(slinha)
       {
         getline(slinha, data, '|');
+        if (data.empty()) break;
         Data d(data);
         getline(slinha, descricao, '|');
         getline(slinha, valor, '|');
@@ -293,12 +294,18 @@ void Banco::lerDados()
         Movimentacao movCarregada(d,descricao,dc[0],dvalor);
         movs.push_back(movCarregada);
       }
-      for (size_t i = 0; i < clientes_.size(); i++)
+      for (size_t i = 0; i < clientes_.size() && !clientes_.empty(); i++)
       {
         if (clientes_[i].getcpf_cnpj() == cpf)
         {
-          Conta contaCarregada(clientes_[i]);
-          contaCarregada.get_movimentacoes() = movs;
+          this->criarConta(clientes_[i]);
+          for(size_t j = 0; j < contas_.size() && !contas_.empty(); j++)
+          {
+            if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
+            {
+              contas_[j].get_movimentacoes() = movs;
+            }
+          }
         }
       }
     }

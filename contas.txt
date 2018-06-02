@@ -1,6 +1,0 @@
-1|540204|111| 7 Feb 2106|Deposito|555555|C| 7 Feb 2106|Transferencia para a conta 3|15351|D
-
-2|0|333
-
-3|15351|222| 7 Feb 2106|Transferencia da conta 31|15351|C
-
