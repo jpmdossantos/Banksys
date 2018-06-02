@@ -32,7 +32,7 @@ Conta::Conta()
   numConta_ = -1;
   cliente_ = gen;
   saldo_ = 0;
-} 
+}
 
 Conta::Conta(const Cliente &cliente)
 {
@@ -142,15 +142,19 @@ std::string Conta::get_ficha_conta()
   ret += IntToString(this->get_num_conta()) + "|";
   ret += DoubleToString(this->get_saldo()) + "|";
   ret += this->get_cliente().getcpf_cnpj();
-  for (size_t i = 0; i < movimentacoes_.size(); i++)
+  if(!movimentacoes_.empty())
   {
-    ret += "|";
-    ret += movimentacoes_[i].get_data_obj().get_data_formatada() + "|";
-    ret += movimentacoes_[i].get_descricao() + "|";
-    ret += DoubleToString(movimentacoes_[i].get_valor_mov()); ret += "|";
-    ret += movimentacoes_[i].get_dc();
+  for (size_t i = 0; i < movimentacoes_.size(); i++)
+    {
+      ret += "|";
+      ret += movimentacoes_[i].get_data_obj().get_data_formatada() + "|";
+      ret += movimentacoes_[i].get_descricao() + "|";
+      ret += DoubleToString(movimentacoes_[i].get_valor_mov()); ret += "|";
+      ret += movimentacoes_[i].get_dc();
+    }
   }
   ret += "\n";
+  return ret;
 }
 
 std::vector <Movimentacao> Conta::get_movimentacoes()
