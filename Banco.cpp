@@ -285,6 +285,7 @@ void Banco::lerDados()
       while(slinha)
       {
         getline(slinha, data, '|');
+        if (data.empty()) break;
         Data d(data);
         getline(slinha, descricao, '|');
         getline(slinha, valor, '|');

@@ -1,0 +1,12 @@
+0|0|666
+
+1|6998|666|2-6-2018|Deposito|10000|C|2-6-2018|Transferencia para a conta 3000|2|D|2-6-2018|Transferencia para a conta 2|3000|D
+
+2|3000|111|2-6-2018|Transferencia da conta 21|3000|C
+
+3|0|111
+
+4|0|222
+
+5|0|222
+

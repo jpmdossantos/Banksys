@@ -5,7 +5,7 @@
 
 #include "banksys.h"
 
-// dd/mm/aaaa
+// dd|mm|aaaa
 Data::Data(std::string dataformatada)
 {
   std::string dform = dataformatada;
@@ -15,9 +15,9 @@ Data::Data(std::string dataformatada)
   std::string mes;
   std::string ano;
 
-  getline(sdata, dia, '/');
-  getline(sdata, mes, '/');
-  getline(sdata, ano, '/');
+  getline(sdata, dia, '-');
+  getline(sdata, mes, '-');
+  getline(sdata, ano, '-');
 
   dia_ = stoi(dia);
   mes_ = stoi(mes);
@@ -104,7 +104,7 @@ int Data::get_ano()
 
 std::string Data::get_data_formatada()
 {
-
+/*
   time_t unix_;
   //faco uma copia pq essas funcoes malucas
   // de tempo alteram a variavel de entrada,
@@ -119,8 +119,10 @@ std::string Data::get_data_formatada()
   ret += sd[8]; ret += sd[9]; ret += " ";
   ret += sd[4]; ret += sd[5]; ret += sd[6]; ret += " ";
   ret += sd[20]; ret += sd[21]; ret += sd[22]; ret += sd[23];
+*/
 
-  return ret;
+  return IntToString(get_dia()) + "-" + IntToString(get_mes()) +
+  "-" + IntToString(get_ano());
 
 }
 
