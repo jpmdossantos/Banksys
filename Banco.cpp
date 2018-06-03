@@ -328,21 +328,23 @@ void Banco::lerDados()
         }
 
       }
-      for(size_t j = 0; j < contas_.size() && !contas_.empty(); j++)
+
+
+
+    }
+    for(size_t j = 0; j < contas_.size() && !contas_.empty(); j++)
+    {
+      if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
       {
-        if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
+        for (size_t k = 0; k < movs.size() - 1; k++)
         {
-          for (size_t k = 0; k < movs.size(); k++)
-          {
-            contas_[j].inserirMovimentacao(movs[k]);
-          }
+          contas_[j].inserirMovimentacao(movs[k]);
         }
       }
     }
+    contas.close();
   }
-  contas.close();
 }
-
 
 
 
