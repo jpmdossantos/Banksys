@@ -230,7 +230,7 @@ if(valor == -1){
 cout<< "O numero de conta inserido nao foi encontrado";
 }
 else{
-cout<<"O saldo da conta e de: R$"<<valor<<",00"<<endl;
+cout<<"O saldo da conta e de: R$"<<valor<<endl;
 }
 }
 

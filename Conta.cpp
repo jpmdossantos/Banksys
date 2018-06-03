@@ -43,6 +43,8 @@ Conta::Conta(const Cliente &cliente)
   saldo_ = 0;
 }
 
+
+
 int Conta::get_num_conta()const
 {
   return numConta_;
