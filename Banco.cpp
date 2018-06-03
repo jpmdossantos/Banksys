@@ -164,9 +164,55 @@ void Banco::cobrarTarifa()
 
 void Banco::cobrarCPMF()
 {
+Data hoje;
+double cpmf=0;
+std::vector <Movimentacao> movi ;
+
+int dia = hoje.get_dia();
+int mes = hoje.get_mes();
+int ano = hoje.get_ano();
+dia -=7;
+if (dia <0)
+{
+  if(mes==2 || mes==4 || mes==6 || mes==8 || mes==9 || mes==11 )
+  {
+    dia+=31;
+  }
+  if(mes == 3)
+  {
+    dia+=28;
+  }
+  if(mes==3 || mes==5 || mes==7 || mes==10 || mes==12 )
+  {
+    dia+=30;
+  }
+  if(mes == 1)
+  {
+    dia+=31;
+    mes=12;
+    ano-=1;
+  }
+}
+
+Data seteatras(dia,mes,ano);
+
+
+
   for(size_t i = 0; i<contas_.size(); i++)
   {
+
     double cpmf;
+
+
+  movi = contas_[i].get_movimentacoes();
+    for (size_t i = 0; i < movi.size(); i++)
+      {
+        if(movi[i].get_data_obj()>=hoje)
+          if(movi[i].get_data_obj()<=seteatras)
+            {
+              cpmf+=movi[i].get_valor_mov()*0.38/100;
+            }
+      }
 
     std::string texto = "Cobranca de CPMF";
     contas_[i].debitar(cpmf, texto);
