@@ -161,3 +161,8 @@ std::vector <Movimentacao> Conta::get_movimentacoes()
 {
   return movimentacoes_;
 }
+
+void Conta::inserirMovimentacao(const Movimentacao &M)
+{
+  movimentacoes_.push_back(M);
+}

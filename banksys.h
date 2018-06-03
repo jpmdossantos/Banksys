@@ -94,6 +94,8 @@ public:
   std::string get_extrato(Data data)const;
   std::string get_extrato(Data datain, Data datasup)const;
   std::string get_ficha_conta()const;
+  void inserirMovimentacao(const Movimentacao &M);
+
 
 };
 

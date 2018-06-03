@@ -328,7 +328,10 @@ void Banco::lerDados()
           {
             if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
             {
-              contas_[j].get_movimentacoes() = movs;
+              for (size_t k = 0; k < movs.size(); k++)
+              {
+                contas_[j].inserirMovimentacao(movs[k]);
+              }
             }
           }
         }
