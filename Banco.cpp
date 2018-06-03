@@ -166,7 +166,8 @@ void Banco::cobrarCPMF()
 {
   for(size_t i = 0; i<contas_.size(); i++)
   {
-    double cpmf = contas_[i].get_saldo() * (0.38/100);
+    double cpmf;
+
     std::string texto = "Cobranca de CPMF";
     contas_[i].debitar(cpmf, texto);
   }
@@ -300,11 +301,13 @@ void Banco::lerDados()
 
   if (contas.is_open())
   {
+
     while(getline(contas,linha))
     {
       std::istringstream slinha(linha);
       getline(slinha, numeroconta, '|');
       getline(slinha, saldo, '|');
+      double dsaldo = stod(saldo);
       getline(slinha, cpf, '|');
       while(slinha)
       {
@@ -319,29 +322,35 @@ void Banco::lerDados()
         Movimentacao movCarregada(d,descricao,dc[0],dvalor);
         movs.push_back(movCarregada);
       }
-      for (size_t i = 0; i < clientes_.size() && !clientes_.empty(); i++)
+
+      size_t s;
+      for (size_t i = 0; i < clientes_.size(); i++)
       {
         if (clientes_[i].getcpf_cnpj() == cpf)
         {
+          s = i;
           this->criarConta(clientes_[i]);
-
         }
-
       }
 
-
-
-    }
-    for(size_t j = 0; j < contas_.size() && !contas_.empty(); j++)
-    {
-      if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
+      for(size_t j = 0; j < contas_.size(); j++)
       {
-        for (size_t k = 0; k < movs.size() - 1; k++)
+        if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
         {
-          contas_[j].inserirMovimentacao(movs[k]);
+          contas_[j].creditar(dsaldo, "Reinicializacao do sistema");
+          for (size_t k = 0; k < movs.size() - 1; k++)
+          {
+            contas_[j].inserirMovimentacao(movs[k]);
+          }
         }
+        break;
+
       }
+
+
+
     }
+
     contas.close();
   }
 }
