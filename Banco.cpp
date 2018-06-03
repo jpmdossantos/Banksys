@@ -6,7 +6,7 @@
 #include <cstdio>
 #include "banksys.h"
 using namespace std;
-
+using namespace banco;
 
 
 Banco::Banco()

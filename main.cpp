@@ -3,7 +3,7 @@
 #include <cstring>
 #include "banksys.h"
 using namespace std;
-
+using namespace banco;
 
 int main()
 {

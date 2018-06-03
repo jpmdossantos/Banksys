@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "banksys.h"
+using namespace banco;
 
 // dd|mm|aaaa
 Data::Data(std::string dataformatada)

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "banksys.h"
+using namespace banco;
 
 Movimentacao::Movimentacao(Data dataMov, std::string descr, char dc, double valor)
 {

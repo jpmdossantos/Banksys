@@ -3,6 +3,7 @@
 #include <vector>
 #include "banksys.h"
 using namespace std;
+using namespace banco;
 
 Interface::Interface(){
 }

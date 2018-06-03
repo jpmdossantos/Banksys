@@ -3,6 +3,7 @@
 #include <vector>
 #include "banksys.h"
 using namespace std;
+using namespace banco;
 
 Cliente::Cliente(string name, string id, string add, string pho)
 {

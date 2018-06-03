@@ -5,6 +5,7 @@
 #include <sstream>
 #include "banksys.h"
 using namespace std;
+using namespace banco;
 
 
 string DoubleToString(double d)

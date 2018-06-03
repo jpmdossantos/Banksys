@@ -2,8 +2,11 @@
 #define BANKSYS_H
 
 #include <vector>
-
 std::string IntToString(int n);
+
+
+namespace banco{
+
 
 class Data
 {
@@ -158,7 +161,7 @@ void listacontas()const;
 void printaconta(const Conta &contat)const;
 void principal();
 };
-
+}
 
 
 
