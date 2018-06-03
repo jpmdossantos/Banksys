@@ -1,8 +1,6 @@
-<<<<<<< Updated upstream
-0|0|111
+0|0|555|2-6-2018|Cobranca de CPMF|0|D|2-6-2018|Cobranca de CPMF|0|D
 
-1|0|666
-=======
-0|0|333
->>>>>>> Stashed changes
+1|942.196|111|2-6-2018|Deposito|1000|C|2-6-2018|Cobranca de CPMF|3.8|D|2-6-2018|Saque|50|D|2-6-2018|Cobranca de CPMF|4.00444|D
+
+2|0|666|2-6-2018|Cobranca de CPMF|3.8|D|2-6-2018|Cobranca de CPMF|4.01888|D
 
