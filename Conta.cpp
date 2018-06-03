@@ -157,7 +157,7 @@ std::string Conta::get_ficha_conta()const
   return ret;
 }
 
-std::vector <Movimentacao> Conta::get_movimentacoes()const
+std::vector <Movimentacao> Conta::get_movimentacoes()
 {
   return movimentacoes_;
 }

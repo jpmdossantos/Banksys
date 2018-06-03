@@ -87,7 +87,7 @@ public:
   int get_num_conta()const;
   double get_saldo()const;
   Cliente get_cliente()const;
-  std::vector <Movimentacao> get_movimentacoes()const;
+  std::vector <Movimentacao> get_movimentacoes();
   void debitar(double valor, std::string descr);
   void creditar(double valor, std::string descr);
   std::string get_extrato()const;
