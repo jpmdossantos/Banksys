@@ -6,7 +6,7 @@
 #include <cstdio>
 #include "banksys.h"
 using namespace std;
-
+using namespace banco;
 
 
 Banco::Banco()
@@ -21,15 +21,38 @@ Banco::Banco(std::string nome, std::vector<Cliente> clientes, std::vector<Conta>
   nomeBanco_ = nome;
 }
 
-void Banco::inserirCliente(Cliente C)
+void Banco::inserirCliente(const Cliente &C)
 {
-  clientes_.push_back(C);
+  bool jaTemCPF = false;
+  for(size_t i = 0; i < clientes_.size(); i++)
+  {
+    if (clientes_[i].getcpf_cnpj() == C.getcpf_cnpj())
+    {
+      jaTemCPF = true;
+    }
+  }
+  if(!jaTemCPF)
+  {
+    clientes_.push_back(C);
+  }
+
 }
 
 void Banco::criarConta( const Cliente &C)
 {
+  bool jaTemConta = false; //primeiro verifica se o cliente ja tem conta
+  for(size_t i = 0; i < contas_.size(); i++)
+  {
+    if (contas_[i].get_cliente().getcpf_cnpj() == C.getcpf_cnpj())
+    {
+      jaTemConta = true;
+    }
+  }
+  if (!jaTemConta)
+  {
   Conta nova(C);
   contas_.push_back(nova);
+  }
 }
 
 void Banco::excluirCliente(std::string cpf_cnpj)
@@ -70,7 +93,7 @@ void Banco::excluirConta(int numConta)
   }
 }
 
-void Banco::deposito(int numConta, double valor)
+void Banco::deposito( int numConta,double valor)
 {
   for(size_t i = 0; i<contas_.size(); i++)
   {
@@ -141,15 +164,57 @@ void Banco::cobrarTarifa()
 
 void Banco::cobrarCPMF()
 {
+Data hoje;
+double cpmf=0;
+std::vector <Movimentacao> movi ;
+
+int dia = hoje.get_dia();
+int mes = hoje.get_mes();
+int ano = hoje.get_ano();
+dia -=7;
+if (dia <0)
+{
+  if(mes==2 || mes==4 || mes==6 || mes==8 || mes==9 || mes==11 )
+  {
+    dia+=31;
+  }
+  if(mes == 3)
+  {
+    dia+=28;
+  }
+  if(mes==3 || mes==5 || mes==7 || mes==10 || mes==12 )
+  {
+    dia+=30;
+  }
+  if(mes == 1)
+  {
+    dia+=31;
+    mes=12;
+    ano-=1;
+  }
+}
+
+Data seteatras(dia,mes,ano);
+
+
+
   for(size_t i = 0; i<contas_.size(); i++)
   {
-    double cpmf = contas_[i].get_saldo() * (0.38/100);
+  movi = contas_[i].get_movimentacoes();
+    for (size_t i = 0; i < movi.size(); i++)
+      {
+        if(movi[i].get_data_obj()>=hoje)
+          if(movi[i].get_data_obj()<=seteatras)
+            {
+              cpmf+=movi[i].get_valor_mov()*0.38/100;
+            }
+      }
     std::string texto = "Cobranca de CPMF";
     contas_[i].debitar(cpmf, texto);
   }
 }
 
-double Banco::obterSaldo(int numConta)
+double Banco::obterSaldo(int numConta)const
 {
   for(size_t i = 0; i<contas_.size(); i++)
   {
@@ -162,7 +227,7 @@ double Banco::obterSaldo(int numConta)
   //indicador de que nao achou a conta
 }
 
-std::string Banco::obterExtrato(int numConta)
+std::string Banco::obterExtrato(int numConta)const
 {
   for (size_t i = 0; i < contas_.size(); i++)
   {
@@ -174,7 +239,7 @@ std::string Banco::obterExtrato(int numConta)
   return "Conta inexistente";
 }
 
-std::string Banco::obterExtrato(int numConta, Data dInicial)
+std::string Banco::obterExtrato(int numConta, Data dInicial)const
 {
   for (size_t i = 0; i < contas_.size(); i++)
   {
@@ -186,7 +251,7 @@ std::string Banco::obterExtrato(int numConta, Data dInicial)
   return "Conta inexistente";
 }
 
-std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)
+std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)const
 {
   for (size_t i = 0; i < contas_.size(); i++)
   {
@@ -198,12 +263,12 @@ std::string Banco::obterExtrato(int numConta, Data dInicial, Data dFinal)
   return "Conta inexistente";
 }
 
-std::vector<Cliente> Banco::obterListaClientes()
+std::vector<Cliente> Banco::obterListaClientes()const
 {
   return clientes_;
 }
 
-std::vector<Conta> Banco::obterListaContas()
+std::vector<Conta> Banco::obterListaContas()const
 {
   return contas_;
 }
@@ -212,8 +277,10 @@ std::vector<Conta> Banco::obterListaContas()
 
 void Banco::gravarDados()
 {
-  std::ofstream clientes("clientes.txt");
-  std::ofstream contas("contas.txt");
+  std::ofstream clientes;
+  clientes.open("clientes.txt", std::ofstream::out | std::ofstream::trunc);
+  std::ofstream contas;
+  contas.open("contas.txt", std::ofstream::out | std::ofstream::trunc);
 
   if(clientes.is_open())
   {
@@ -255,8 +322,8 @@ void Banco::lerDados()
   std::vector<Movimentacao> movs;
 
   std::string linha;
-  std::ifstream clientes("clientes.txt");
 
+  std::ifstream clientes("clientes.txt");
   if(clientes.is_open())
   {
     while(getline(clientes,linha))
@@ -271,7 +338,6 @@ void Banco::lerDados()
     }
   }
   clientes.close();
-
   std::ifstream contas("contas.txt");
 
   if (contas.is_open())
@@ -300,20 +366,27 @@ void Banco::lerDados()
         if (clientes_[i].getcpf_cnpj() == cpf)
         {
           this->criarConta(clientes_[i]);
-          for(size_t j = 0; j < contas_.size() && !contas_.empty(); j++)
-          {
-            if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
-            {
-              contas_[j].get_movimentacoes() = movs;
-            }
-          }
+
+        }
+
+      }
+
+
+
+    }
+    for(size_t j = 0; j < contas_.size() && !contas_.empty(); j++)
+    {
+      if(contas_[j].get_cliente().getcpf_cnpj() == cpf)
+      {
+        for (size_t k = 0; k < movs.size() - 1; k++)
+        {
+          contas_[j].inserirMovimentacao(movs[k]);
         }
       }
     }
+    contas.close();
   }
-  contas.close();
 }
-
 
 
 
@@ -330,7 +403,7 @@ std::string Banco::get_dados_conta(int numConta)
   return "conta nao existe";
 }
 
-std::string Banco::get_dados_cliente(std::string cpf_cnpj)
+std::string Banco::get_dados_cliente(std::string cpf_cnpj)const
 {
   for (size_t i = 0; i < clientes_.size(); i++)
   {

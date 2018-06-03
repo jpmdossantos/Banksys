@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "banksys.h"
+using namespace banco;
 
 // dd|mm|aaaa
 Data::Data(std::string dataformatada)
@@ -85,19 +86,19 @@ time_t Data::get_data_unix()
 */
 
 
-int Data::get_dia()
+int Data::get_dia()const
 {
   return dia_;
 }
 
 
 
-int Data::get_mes()
+int Data::get_mes()const
 {
   return mes_;
 }
 
-int Data::get_ano()
+int Data::get_ano()const
 {
   return ano_;
 }

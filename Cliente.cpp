@@ -3,6 +3,7 @@
 #include <vector>
 #include "banksys.h"
 using namespace std;
+using namespace banco;
 
 Cliente::Cliente(string name, string id, string add, string pho)
 {
@@ -68,12 +69,4 @@ this->endereco =add;
 void Cliente::setfone(string pho)
 {
   this->fone = pho;
-}
-
-void Cliente::putdata()
-{
-  cout<<endl<<"Nome: "<< this->nomeCliente <<endl;
-  cout<<"CPF/CNPJ: "<< this->cpf_cnpj_ <<endl;
-  cout<<"Endereço: "<< this->endereco <<endl;
-  cout<<"Telefone: "<< this->fone <<endl;
 }

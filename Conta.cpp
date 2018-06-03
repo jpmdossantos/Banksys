@@ -5,6 +5,7 @@
 #include <sstream>
 #include "banksys.h"
 using namespace std;
+using namespace banco;
 
 
 string DoubleToString(double d)
@@ -42,17 +43,17 @@ Conta::Conta(const Cliente &cliente)
   saldo_ = 0;
 }
 
-int Conta::get_num_conta()
+int Conta::get_num_conta()const
 {
   return numConta_;
 }
 
-double Conta::get_saldo()
+double Conta::get_saldo()const
 {
   return saldo_;
 }
 
-Cliente Conta::get_cliente()
+Cliente Conta::get_cliente()const
 {
   return cliente_;
 }
@@ -77,7 +78,7 @@ void Conta::creditar(double valor, std::string descr)
   movimentacoes_.push_back(m);
 }
 
-std::string Conta::get_extrato()
+std::string Conta::get_extrato()const
 {
   Data agora;
   std::string ret = "";
@@ -99,7 +100,7 @@ std::string Conta::get_extrato()
 }
 
 //temq ser na forma certinha 'd/m/a' senao da ruim
-std::string Conta::get_extrato(Data data)
+std::string Conta::get_extrato(Data data)const
 {
   std::string ret = "";
   for (size_t i = 0; i < movimentacoes_.size(); i++)
@@ -116,7 +117,7 @@ std::string Conta::get_extrato(Data data)
 }
 
 
-std::string Conta::get_extrato(Data datain, Data datasup)
+std::string Conta::get_extrato(Data datain, Data datasup)const
 {
   std::string ret = "";
   for (size_t i = 0; i < movimentacoes_.size(); i++)
@@ -136,7 +137,7 @@ std::string Conta::get_extrato(Data datain, Data datasup)
 
 }
 
-std::string Conta::get_ficha_conta()
+std::string Conta::get_ficha_conta()const
 {
   std::string ret = "";
   ret += IntToString(this->get_num_conta()) + "|";
@@ -160,4 +161,9 @@ std::string Conta::get_ficha_conta()
 std::vector <Movimentacao> Conta::get_movimentacoes()
 {
   return movimentacoes_;
+}
+
+void Conta::inserirMovimentacao(const Movimentacao &M)
+{
+  movimentacoes_.push_back(M);
 }
